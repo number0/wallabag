@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Event\Activity\Actions\Annotation\AnnotationCreatedEvent;
+use Wallabag\CoreBundle\Event\Activity\Actions\Annotation\AnnotationDeletedEvent;
+use Wallabag\CoreBundle\Event\Activity\Actions\Annotation\AnnotationEditedEvent;
 
 class WallabagAnnotationController extends FOSRestController
 {
@@ -65,6 +68,8 @@ class WallabagAnnotationController extends FOSRestController
         $em->persist($annotation);
         $em->flush();
 
+        $this->get('event_dispatcher')->dispatch(AnnotationCreatedEvent::NAME, new AnnotationCreatedEvent($annotation));
+
         $json = $this->get('serializer')->serialize($annotation, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -93,6 +98,8 @@ class WallabagAnnotationController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
+        $this->get('event_dispatcher')->dispatch(AnnotationEditedEvent::NAME, new AnnotationEditedEvent($annotation));
+
         $json = $this->get('serializer')->serialize($annotation, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -114,6 +121,8 @@ class WallabagAnnotationController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->remove($annotation);
         $em->flush();
+
+        $this->get('event_dispatcher')->dispatch(AnnotationDeletedEvent::NAME, new AnnotationDeletedEvent($annotation));
 
         $json = $this->get('serializer')->serialize($annotation, 'json');
 

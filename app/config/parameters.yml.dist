@@ -22,6 +22,9 @@ parameters:
     # with MySQL, use "utf8mb4" if you got problem with content with emojis
     database_charset: utf8
 
+    # Instance URL
+    domain_name: wallabag.tld
+
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: ~

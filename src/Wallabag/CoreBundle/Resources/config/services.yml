@@ -195,3 +195,11 @@ services:
 
     wallabag_core.entry.download_images.client:
         class: GuzzleHttp\Client
+
+    wallabag_core.activity.subscriber:
+        class: Wallabag\CoreBundle\Event\Activity\ActivitySubscriber
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
