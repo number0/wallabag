@@ -54,4 +54,23 @@ class NotificationsController extends Controller
 
         return $this->redirectToRoute('notifications-all');
     }
+
+    /**
+     * @Route("/notifications/read/{notification}/redirect", name="notification-archive-redirect", requirements={"notification" = "\d+"})
+     *
+     * @param Request $request
+     * @param Notification $notification
+     */
+    public function markNotificationAsReadAndRedirectAction(Request $request, Notification $notification)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $notification->setRead(true);
+
+        $em->persist($notification);
+        $em->flush();
+
+        $redirection = $request->get('redirection');
+        $this->redirect($redirection);
+    }
 }

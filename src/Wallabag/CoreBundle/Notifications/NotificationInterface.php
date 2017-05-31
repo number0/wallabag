@@ -63,4 +63,15 @@ interface NotificationInterface extends LoggerAwareInterface {
      * @return NotificationInterface
      */
     public function addAction(ActionInterface $action);
+
+    /**
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * @param string $description
+     * @return NotificationInterface
+     */
+    public function setDescription($description);
 }

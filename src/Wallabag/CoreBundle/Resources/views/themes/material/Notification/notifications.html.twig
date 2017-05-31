@@ -18,6 +18,7 @@
                             {% endif %}
                         {% endspaceless %}</i>
                     <span class="title">{{ notification.title }}</span>
+                    <p>{{ notification.description }}</p>
                     <p><em>{{ notification.timestamp | date }}</em></p>
                     <div class="secondary-content">
                         {% if not notification.read %}
@@ -31,7 +32,7 @@
                                    {% elseif action.type == constant('TYPE_INFO', action) %}
                                         blue-grey
                                    {% endif %}
-                                    {% endspaceless %}" data-id="{{ notification.id }}" href="{{ action.link }}">{{ action.label }}</a>
+                                    {% endspaceless %}" data-id="{{ notification.id }}" href="{{ path('notification-archive-redirect', {'redirection': action.link, 'notification': notification.id}) }}">{{ action.label }}</a>
                             {% endfor %}
                         <button class="notification-action waves-effect waves-teal btn-flat" data-id="{{ notification.id }}"><i data-id="{{ notification.id }}" class="material-icons">check</i></button>
                         {% endif %}

@@ -57,6 +57,13 @@ class Notification implements NotificationInterface {
     protected $title;
 
     /**
+     * @var string $description
+     *
+     * @ORM\Column(name="description", type="string", nullable=true)
+     */
+    protected $description;
+
+    /**
      * @var boolean $read
      *
      * @ORM\Column(name="read", type="boolean")
@@ -216,5 +223,23 @@ class Notification implements NotificationInterface {
     public function getActions()
     {
         return $this->actions;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Notification
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
     }
 }

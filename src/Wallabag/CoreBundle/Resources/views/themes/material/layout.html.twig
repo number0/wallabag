@@ -153,6 +153,7 @@
                     {% endif %}
                     {% endspaceless %}</i>
                 <span class="title">{{ notification.title }}</span>
+                <p>{{ notification.description }}</p>
                 <p><em>{{ notification.timestamp | date }}</em></p>
                 <div>
                     {% for action in notification.actions %}
@@ -165,7 +166,7 @@
                                {% elseif action.type == constant('TYPE_INFO', action) %}
                                     blue-grey
                                {% endif %}
-                                {% endspaceless %}" href="{{ action.link }}">{{ action.label }}</a>
+                                {% endspaceless %}" href="{{ path('notification-archive-redirect', {'redirection': action.link, 'notification': notification.id}) }}">{{ action.label }}</a>
                     {% endfor %}
                 </div>
             </li>
