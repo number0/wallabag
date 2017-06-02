@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Twig;
 
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Notifications\NotificationInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
@@ -48,8 +47,14 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         return preg_replace('/^www\./i', '', $url);
     }
 
-    public function unreadNotif(Collection $notifs)
+    /**
+     * @param $notifs
+     */
+    public function unreadNotif($notifs)
     {
+        if (!$notifs) {
+            return;
+        }
         return $notifs->filter(function(NotificationInterface $notif) {
            return !$notif->isRead();
         });

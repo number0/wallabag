@@ -2,6 +2,9 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,17 +14,31 @@ use Wallabag\CoreBundle\Entity\Notification;
 class NotificationsController extends Controller
 {
     /**
-     * @param Request $request
+     * @Route("/notifications/{page}", name="notifications-all", defaults={"page" = "1"})
      *
-     * @Route("/notifications", name="notifications-all")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param int $page
+     * @return Response
      */
-    public function getAllNotificationsAction(Request $request)
+    public function getAllNotificationsAction($page = 1)
     {
-        $notifications = $this->getDoctrine()->getRepository('WallabagCoreBundle:Notification')->findByUser($this->getUser());
+        $qb = $this->getDoctrine()->getRepository('WallabagCoreBundle:Notification')->getBuilderForNotificationsByUser($this->getUser()->getId());
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
-        return $this->render('WallabagCoreBundle:Notification:notifications.html.twig', ['notifications' => $notifications]);
+        $notifications = new Pagerfanta($pagerAdapter);
+        $notifications->setMaxPerPage($this->getParameter('wallabag_core.notifications_nb'));
+
+        try {
+            $notifications->setCurrentPage($page);
+        } catch (OutOfRangeCurrentPageException $e) {
+            if ($page > 1) {
+                return $this->redirect($this->generateUrl('notifications-all', ['page' => $notifications->getNbPages()]), 302);
+            }
+        }
+
+        return $this->render('WallabagCoreBundle:Notification:notifications.html.twig', [
+            'notifications' => $notifications,
+            'currentPage' => $page,
+        ]);
     }
 
     /**

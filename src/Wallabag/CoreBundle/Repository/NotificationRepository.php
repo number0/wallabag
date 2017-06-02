@@ -14,4 +14,11 @@ class NotificationRepository extends EntityRepository {
         ->getQuery()
         ->getResult();
     }
+
+    public function getBuilderForNotificationsByUser($userId) {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.user = :userId')->setParameter('userId', $userId)
+            ->orderBy('n.timestamp', 'desc')
+            ;
+    }
 }

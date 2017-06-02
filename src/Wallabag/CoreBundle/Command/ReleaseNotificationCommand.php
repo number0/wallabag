@@ -70,12 +70,13 @@ class ReleaseNotificationCommand extends AbstractNotificationCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $notification = new Notification($user);
-        $notification->setTitle($this->getContainer()->get('translator')->trans('notifications.release.title', ['%version%' => $this->getContainer()->getParameter('wallabag_core.version')]))
+        $notification->setTitle('notifications.release.title')
+            ->addParameter('%version%', $this->getContainer()->getParameter('wallabag_core.version'))
             ->setType(Notification::TYPE_RELEASE);
         if ($link) {
             $details = new Action();
             $details->setType(Action::TYPE_INFO)
-                ->setLabel($this->getContainer()->get('translator')->trans('notifications.release.details'))
+                ->setLabel('notifications.release.details')
                 ->setLink($link);
             $notification->addAction($details);
         }

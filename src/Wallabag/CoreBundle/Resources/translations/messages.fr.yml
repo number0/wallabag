@@ -252,6 +252,10 @@ notifications:
     list:
         page_title: 'Notifications'
         mark_all_as_read: 'Marquer tout comme lu'
+        none: "Aucune notification pour le moment :'("
+    release:
+        title: "wallabag a été mis à jour vers la version %version%"
+        details: "Voir les détails de la mise à jour"
 
 about:
     page_title: "À propos"

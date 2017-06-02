@@ -13,6 +13,13 @@ services:
         tags:
             - { name: twig.extension }
 
+    twig.extension.date:
+        class: Twig_Extensions_Extension_Date
+        arguments:
+            - "@translator"
+        tags:
+            - { name: twig.extension }
+
     wallabag.twig_extension:
         class: Wallabag\CoreBundle\Twig\WallabagExtension
         public: false

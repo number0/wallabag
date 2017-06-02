@@ -70,6 +70,13 @@ class Notification implements NotificationInterface {
      */
     protected $read;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="parameters", type="array", nullable=true)
+     */
+    protected $parameters;
+
     protected $logger;
 
     /**
@@ -90,6 +97,7 @@ class Notification implements NotificationInterface {
         $this->logger = new NullLogger();
         $this->timestamp = new \DateTime();
         $this->actions = new ArrayCollection();
+        $this->parameters = [];
         $this->read = false;
         $this->user = $user;
     }
@@ -240,6 +248,41 @@ class Notification implements NotificationInterface {
     public function setDescription($description)
     {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param array $parameters
+     * @return Notification
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
+        return $this;
+    }
+
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return Notification
+     * @throws \InvalidArgumentException
+     */
+    public function addParameter($key, $value)
+    {
+        if (in_array($key, $this->parameters, true)) {
+            throw new \InvalidArgumentException('This parameter already is set');
+        }
+
+        $this->parameters[$key] = $value;
         return $this;
     }
 }
