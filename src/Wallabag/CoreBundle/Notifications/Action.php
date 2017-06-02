@@ -2,8 +2,8 @@
 
 namespace Wallabag\CoreBundle\Notifications;
 
-class Action implements ActionInterface {
-
+class Action implements ActionInterface
+{
     /**
      * @var string
      */
@@ -34,11 +34,13 @@ class Action implements ActionInterface {
 
     /**
      * @param string $label
+     *
      * @return ActionInterface
      */
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -52,7 +54,9 @@ class Action implements ActionInterface {
 
     /**
      * @param int $type
+     *
      * @return ActionInterface
+     *
      * @throws \InvalidArgumentException
      */
     public function setType($type)
@@ -61,6 +65,7 @@ class Action implements ActionInterface {
             throw new \InvalidArgumentException('The given type option is invalid');
         }
         $this->type = $type;
+
         return $this;
     }
 
@@ -74,11 +79,13 @@ class Action implements ActionInterface {
 
     /**
      * @param string $link
+     *
      * @return ActionInterface
      */
     public function setLink($link)
     {
         $this->link = $link;
+
         return $this;
     }
 }

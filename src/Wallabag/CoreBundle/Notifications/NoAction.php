@@ -2,8 +2,8 @@
 
 namespace Wallabag\CoreBundle\Notifications;
 
-class NoAction extends Action {
-
+class NoAction extends Action
+{
     public function __construct($link)
     {
         $this->link = $link;

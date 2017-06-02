@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Wallabag\CoreBundle\Entity\Notification;
 use Wallabag\CoreBundle\Notifications\InfoAction;
-use Wallabag\CoreBundle\Notifications\NotificationInterface;
 use Wallabag\UserBundle\Entity\User;
 
 class AdminNotificationCommand extends AbstractNotificationCommand

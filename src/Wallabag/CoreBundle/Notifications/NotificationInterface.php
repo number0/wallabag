@@ -4,10 +4,10 @@ namespace Wallabag\CoreBundle\Notifications;
 
 use Psr\Log\LoggerAwareInterface;
 
-interface NotificationInterface extends LoggerAwareInterface {
-
+interface NotificationInterface extends LoggerAwareInterface
+{
     /**
-     * Title of the notification
+     * Title of the notification.
      *
      * @return string
      */
@@ -15,6 +15,7 @@ interface NotificationInterface extends LoggerAwareInterface {
 
     /**
      * @param string $title
+     *
      * @return NotificationInterface
      */
     public function setTitle($title);
@@ -28,25 +29,27 @@ interface NotificationInterface extends LoggerAwareInterface {
 
     /**
      * @param int $type
+     *
      * @return NotificationInterface
      */
     public function setType($type);
 
     /**
-     * If the notification has been viewed / dismissed or not
+     * If the notification has been viewed / dismissed or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRead();
 
     /**
-     * @param boolean $read
+     * @param bool $read
+     *
      * @return NotificationInterface
      */
     public function setRead($read);
 
     /**
-     * When the notification was sent
+     * When the notification was sent.
      *
      * @return \DateTime
      */
@@ -54,12 +57,14 @@ interface NotificationInterface extends LoggerAwareInterface {
 
     /**
      * @param \DateTime $timestamp
+     *
      * @return NotificationInterface
      */
     public function setTimestamp(\DateTime $timestamp);
 
     /**
      * @param ActionInterface $action
+     *
      * @return NotificationInterface
      */
     public function addAction(ActionInterface $action);
@@ -71,6 +76,7 @@ interface NotificationInterface extends LoggerAwareInterface {
 
     /**
      * @param string $description
+     *
      * @return NotificationInterface
      */
     public function setDescription($description);
@@ -82,6 +88,7 @@ interface NotificationInterface extends LoggerAwareInterface {
 
     /**
      * @param array $parameters
+     *
      * @return NotificationInterface
      */
     public function setParameters($parameters);
@@ -89,6 +96,7 @@ interface NotificationInterface extends LoggerAwareInterface {
     /**
      * @param string $key
      * @param string $value
+     *
      * @return NotificationInterface
      */
     public function addParameter($key, $value);

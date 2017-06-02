@@ -11,60 +11,59 @@ use Wallabag\CoreBundle\Notifications\NotificationInterface;
 use Wallabag\UserBundle\Entity\User;
 
 /**
- * Class Notification
+ * Class Notification.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\NotificationRepository")
  * @ORM\Table(name="`notification`")
  */
-class Notification implements NotificationInterface {
-
+class Notification implements NotificationInterface
+{
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
      */
     protected $id;
 
     /**
-     * @var int $type
+     * @var int
      *
      * @ORM\Column(name="type", type="integer")
      */
     protected $type;
 
     /**
-     * @var User $user
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="notifications")
      */
     protected $user;
 
     /**
-     * @var \DateTime $timestamp
+     * @var \DateTime
      *
      * @ORM\Column(name="timestamp", type="datetime")
      */
     protected $timestamp;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string")
      */
     protected $title;
 
     /**
-     * @var string $description
+     * @var string
      *
      * @ORM\Column(name="description", type="string", nullable=true)
      */
     protected $description;
 
     /**
-     * @var boolean $read
+     * @var bool
      *
      * @ORM\Column(name="read", type="boolean")
      */
@@ -104,11 +103,13 @@ class Notification implements NotificationInterface {
 
     /**
      * @param LoggerInterface $logger
+     *
      * @return NotificationInterface
      */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+
         return $this;
     }
 
@@ -130,11 +131,13 @@ class Notification implements NotificationInterface {
 
     /**
      * @param mixed $type
+     *
      * @return NotificationInterface
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -148,11 +151,13 @@ class Notification implements NotificationInterface {
 
     /**
      * @param User $user
+     *
      * @return NotificationInterface
      */
     public function setUser(User $user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -166,11 +171,13 @@ class Notification implements NotificationInterface {
 
     /**
      * @param \DateTime $timestamp
+     *
      * @return NotificationInterface
      */
     public function setTimestamp(\DateTime $timestamp)
     {
         $this->timestamp = $timestamp;
+
         return $this;
     }
 
@@ -184,11 +191,13 @@ class Notification implements NotificationInterface {
 
     /**
      * @param string $title
+     *
      * @return NotificationInterface
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -202,17 +211,21 @@ class Notification implements NotificationInterface {
 
     /**
      * @param bool $read
+     *
      * @return NotificationInterface
      */
     public function setRead($read)
     {
         $this->read = $read;
+
         return $this;
     }
 
     /**
      * @param ActionInterface $action
+     *
      * @return NotificationInterface
+     *
      * @throws \InvalidArgumentException
      */
     public function addAction(ActionInterface $action)
@@ -222,6 +235,7 @@ class Notification implements NotificationInterface {
         }
         $this->actionTypes[$action->getType()] = true;
         $this->actions->add($action);
+
         return $this;
     }
 
@@ -243,11 +257,13 @@ class Notification implements NotificationInterface {
 
     /**
      * @param string $description
+     *
      * @return Notification
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -261,19 +277,22 @@ class Notification implements NotificationInterface {
 
     /**
      * @param array $parameters
+     *
      * @return Notification
      */
     public function setParameters($parameters)
     {
         $this->parameters = $parameters;
+
         return $this;
     }
-
 
     /**
      * @param string $key
      * @param string $value
+     *
      * @return Notification
+     *
      * @throws \InvalidArgumentException
      */
     public function addParameter($key, $value)
@@ -283,6 +302,7 @@ class Notification implements NotificationInterface {
         }
 
         $this->parameters[$key] = $value;
+
         return $this;
     }
 }

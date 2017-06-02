@@ -55,8 +55,9 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         if (!$notifs) {
             return;
         }
-        return $notifs->filter(function(NotificationInterface $notif) {
-           return !$notif->isRead();
+
+        return $notifs->filter(function (NotificationInterface $notif) {
+            return !$notif->isRead();
         });
     }
 

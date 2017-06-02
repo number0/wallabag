@@ -4,9 +4,10 @@ namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class NotificationRepository extends EntityRepository {
-
-    public function markAllAsReadForUser($userId) {
+class NotificationRepository extends EntityRepository
+{
+    public function markAllAsReadForUser($userId)
+    {
         return $this->getEntityManager()->createQueryBuilder()
         ->update('WallabagCoreBundle:Notification', 'n')
         ->set('n.read', true)
@@ -15,7 +16,8 @@ class NotificationRepository extends EntityRepository {
         ->getResult();
     }
 
-    public function getBuilderForNotificationsByUser($userId) {
+    public function getBuilderForNotificationsByUser($userId)
+    {
         return $this->createQueryBuilder('n')
             ->andWhere('n.user = :userId')->setParameter('userId', $userId)
             ->orderBy('n.timestamp', 'desc')

@@ -17,6 +17,7 @@ class NotificationsController extends Controller
      * @Route("/notifications/{page}", name="notifications-all", defaults={"page" = "1"})
      *
      * @param int $page
+     *
      * @return Response
      */
     public function getAllNotificationsAction($page = 1)
@@ -45,6 +46,7 @@ class NotificationsController extends Controller
      * @Route("/notifications/readall", name="notification-archive-all")
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function markAllNotificationsAsReadAction(Request $request)
@@ -58,6 +60,7 @@ class NotificationsController extends Controller
      * @Route("/notifications/read/{notification}", name="notification-archive")
      *
      * @param Notification $notification
+     *
      * @return Response
      */
     public function markNotificationsAsReadAction(Notification $notification)
@@ -75,7 +78,7 @@ class NotificationsController extends Controller
     /**
      * @Route("/notifications/read/{notification}/redirect", name="notification-archive-redirect", requirements={"notification" = "\d+"})
      *
-     * @param Request $request
+     * @param Request      $request
      * @param Notification $notification
      */
     public function markNotificationAsReadAndRedirectAction(Request $request, Notification $notification)

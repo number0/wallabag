@@ -2,8 +2,8 @@
 
 namespace Wallabag\CoreBundle\Notifications;
 
-class YesAction extends Action {
-
+class YesAction extends Action
+{
     public function __construct($link)
     {
         $this->link = $link;

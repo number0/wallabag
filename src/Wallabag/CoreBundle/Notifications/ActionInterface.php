@@ -2,8 +2,8 @@
 
 namespace Wallabag\CoreBundle\Notifications;
 
-interface ActionInterface {
-
+interface ActionInterface
+{
     /**
      * @return string
      */
@@ -11,6 +11,7 @@ interface ActionInterface {
 
     /**
      * @param string $label
+     *
      * @return ActionInterface
      */
     public function setLabel($label);
@@ -22,6 +23,7 @@ interface ActionInterface {
 
     /**
      * @param int $type
+     *
      * @return ActionInterface
      */
     public function setType($type);
@@ -33,9 +35,8 @@ interface ActionInterface {
 
     /**
      * @param string $link
+     *
      * @return ActionInterface
      */
     public function setLink($link);
-
-
 }
