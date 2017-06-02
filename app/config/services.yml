@@ -26,8 +26,10 @@ services:
         arguments:
             - "@wallabag_core.entry_repository"
             - "@wallabag_core.tag_repository"
+            - "@wallabag_core.notification_repository"
             - "@security.token_storage"
             - "%wallabag_core.cache_lifetime%"
+            - "%wallabag_core.notifications_nb%"
             - "@translator"
         tags:
             - { name: twig.extension }

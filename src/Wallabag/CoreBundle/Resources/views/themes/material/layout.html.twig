@@ -106,7 +106,7 @@
                     </a>
                 </li>
                 <li id="button_notifications">
-                    {% set unreadNotifs = app.user.notifications | unread_notif | length %}
+                    {% set unreadNotifs = get_notifications() | unread_notif | length %}
                     <a class="nav-panel-menu button-collapse-right tooltipped js-notifications-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.notifications' | trans }}" href="#" data-activates="notifications">
                         <i class="material-icons">notifications{% if unreadNotifs == 0 %}_none{% endif %}</i>
                         {% if unreadNotifs > 0 %}<span id="notifications-count" class="red-text text-accent-2">{{ unreadNotifs }}</span>{% endif %}
@@ -143,7 +143,7 @@
         {% if app.user.notifications is not empty %}
         <div class="notifications-area">
             <ul class="collection">
-                {% for notification in app.user.notifications | slice(0, 10) %}
+                {% for notification in get_notifications() | slice(0, 10) %}
                 <li class="notification collection-item avatar{% if not notification.read %} light-blue lighten-5{% else %} grey-text{% endif %}">
                     <i class="material-icons circle">{% spaceless %}
                         {% if notification.type == constant('TYPE_ADMIN', notification) %}
