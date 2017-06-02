@@ -99,6 +99,6 @@ class AdminNotificationCommand extends AbstractNotificationCommand
         $em->persist($notification);
         $em->flush();
 
-        $this->output->writeln(sprintf('Send notification for user %s', $user->getUserName()));
+        $this->output->writeln(sprintf('Sent notification for user %s', $user->getUserName()));
     }
 }
